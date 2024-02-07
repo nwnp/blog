@@ -5,14 +5,12 @@ import { NextApiHandler } from "next";
 import { INestApplication } from "@nestjs/common";
 
 export module Main {
-  let app: INestApplication;
-
   export async function startServer() {
-    if (!app) {
-      app = await NestFactory.create(AppModule, { bodyParser: false });
-      app.setGlobalPrefix("api");
-      await app.init();
-    }
+    const app: INestApplication = await NestFactory.create(AppModule, {
+      bodyParser: false,
+    });
+    app.setGlobalPrefix("api");
+    await app.init();
 
     return app;
   }
